@@ -1,7 +1,7 @@
 <?php  
 session_start();
 //create constnts to non repeating values
-define('SITEURL' , 'http://localhost/coffe/');
+define('SITEURL' , 'http://localhost/');
 define('LOCALHOST' , 'localhost');
 define('DB_USERNAME' , 'root');
 define('DB_PASSWORD' ,'');

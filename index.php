@@ -3,7 +3,7 @@
     <section class="food-search text-center">
         <div class="container">
             
-            <form action="food-search.html" method="POST">
+            <form action="<?php echo SITEURL;?>food-search.php" method="POST">
                 <input type="search" name="search" placeholder="Search for Drink.." required>
                 <input type="submit" name="submit" value="Search" class="btn btn-primary">
             </form>
@@ -11,6 +11,14 @@
         </div>
     </section>
     <!-- fOOD sEARCH Section Ends Here -->
+
+    <?php 
+    if (isset($_SESSION['order']))
+    {
+        echo $_SESSION['order'];
+        unset($_SESSION['order']);
+    }
+    ?>
 
     <!-- CAtegories Section Starts Here -->
     <section class="categories">
@@ -78,23 +86,21 @@ if($image_name==""){
         
             <?php
 $sql2="SELECT * FROM tbl_drink WHERE active='yes'  AND featured='yes' LIMIT 6";
-$res2 =mysqli_query($conn ,$sql2);
- $count2 = mysqli_num_rows($res2);
+$res2 =mysqli_query($conn ,$sql);
+ $count2 = mysqli_num_rows($res);
      if($count2>0)
  {
-     while($row=mysqli_fetch_assoc($res2))
+     while($row=mysqli_fetch_assoc($res))
         {
          $id = $row['id'];
          $title = $row['title'];
          $price = $row['price'];
-         $description = $row['description'];
          $image_name = $row['image_name'];
 ?>
+<a href="<?php echo SITEURL;?> category-foodss.php?category_id=<?php echo $id;?>"></a>
 
-
-<div class="food-menu-box">
-                <div class="food-menu-img">
-                <?php
+<div class="box-3 float-container">
+  <?php
 if($image_name==""){
     echo "<div class='error'>Image Not Availble</div>";
 }else{
@@ -115,7 +121,7 @@ if($image_name==""){
                     <?php echo $description ?>                 </p>
                     <br>
 
-                    <a href="order.html" class="btn btn-primary">Order Now</a>
+                    <a href="<?php echo SITEURL;?>order.php?food_id=<?php echo $id;?>" class="btn btn-primary">Order Now</a>
                 </div>
             </div>
 
