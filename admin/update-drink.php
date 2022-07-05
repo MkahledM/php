@@ -103,10 +103,10 @@
                 //category available
                 while($row=mysqli_fetch_assoc($res))
                 {
-                    $id = $row['id'];
-                    $title = $row['title'];
+                    $category_id = $row['id'];
+                    $category_title = $row['title'];
                     ?>
-                     <option <?php if($current_category==$id){echo "selected";} ?> value="<?php echo $id; ?>"><?php echo $title ?></option>
+                     <option <?php if($current_category==$category_id){echo "selected";} ?> value="<?php echo $category_id; ?>"><?php echo $category_title ?></option>
 
                     
                      <?php 
@@ -231,7 +231,7 @@
           }
 
           //updating  database 
-          $sql3 = "UPDATE tbl_drink  SET 
+          $sql3= "UPDATE tbl_drink  SET 
           title = '$title',
           description = '$description',
           price = '$price',
@@ -239,10 +239,11 @@
           category_id = '$category',
           featured = '$featured',
           active = '$active'
-          WHERE id=$id";
-          $res3 = mysqli_query($conn,$sql3);
+          WHERE id = $id 
+          ";
+          $res3= mysqli_query($conn,$sql3);
 
-          if($res3==true){
+          if($res3 == true){
        
             $_SESSION['update'] = "<div class='success'>Drink update successfuly</div>";
             header('location:'.SITEURL.'admin/manage-drink.php');
